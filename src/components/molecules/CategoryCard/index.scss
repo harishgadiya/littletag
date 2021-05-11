@@ -1,0 +1,17 @@
+@import '../../../styles';
+
+.category-card {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 8px;
+  .product-image {
+    width: 250px;
+    height: 180px;
+    border-radius: 12px;
+  }
+  .title {
+    margin-top: 8px;
+  }
+}

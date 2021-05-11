@@ -1,0 +1,36 @@
+@import '../../../styles';
+
+nav.navbar {
+  .container {
+    display: block;
+    .navbar-nav {
+      & > a {
+        padding: 0 16px;
+      }
+    }
+  }
+}
+.header {
+  @include flex-center();
+  background-color: $primary-color-H;
+  nav {
+    flex: 1;
+    ul {
+      @include flex-center();
+      list-style: none;
+      li {
+        padding: 5px;
+        margin: 0 10px;
+        a {
+          text-decoration: none;
+          color: inherit;
+          font-size: 20px;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+  .icon {
+    margin: 0 10px;
+  }
+}

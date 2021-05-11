@@ -1,0 +1,17 @@
+@import '../../../styles';
+
+.price {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  .current {
+    font-size: $price-size;
+    font-weight: $font-semibold;
+  }
+  .previous {
+    font-size: $sub-price-size;
+    text-decoration: line-through;
+    color: $primary-color-C;
+    font-weight: $font-semibold;
+  }
+}

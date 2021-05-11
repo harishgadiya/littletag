@@ -1,0 +1,47 @@
+@import '../../../styles';
+
+.checkout-card {
+  width: 560px;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 50px;
+  .product-detail {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    .image {
+      height: 160px;
+      width: 160px;
+      border-radius: 12px;
+    }
+    .details {
+      display: flex;
+      flex-direction: column;
+      margin: 0 24px;
+    }
+  }
+  .action-btns {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    .count {
+      @include flex-center();
+      justify-content: space-between;
+      width: 160px;
+      .text {
+        flex: 1;
+        background-color: $primary-color-J;
+        color: $primary-color-A;
+        font-size: 18px;
+        margin: 0 4px;
+        height: 32px;
+        text-align: center;
+        line-height: 32px;
+        border-radius: 0;
+      }
+    }
+    .button {
+      margin: 0 0 0 32px;
+    }
+  }
+}

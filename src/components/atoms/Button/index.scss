@@ -1,0 +1,19 @@
+@import '../../../styles';
+
+.button {
+  padding: 6px 8px;
+  font-size: $button-size;
+  font-weight: $font-bold;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.outline {
+  border: 2px solid $primary-color-B;
+  color: $primary-color-A;
+}
+
+.filled {
+  background-color: $primary-color-B;
+  color: $primary-color-H;
+}

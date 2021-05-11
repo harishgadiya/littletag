@@ -1,0 +1,11 @@
+@import '../../../styles';
+
+.tag {
+  height: fit-content;
+  color: $secondary-color-A;
+  font-size: $tag-size;
+  font-weight: $font-semibold;
+  background-color: $secondary-color-E;
+  border-radius: 12px;
+  padding: 0 8px;
+}
