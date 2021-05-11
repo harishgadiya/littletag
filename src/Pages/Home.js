@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Modal from "bootstrap/Modal";
-import { Button, Checkbox, Container, Radio } from "../components/atoms";
+// import Modal from "bootstrap/Modal";
+import { Checkbox, Container, Radio } from "../components/atoms";
 import {
 	AddressCard,
 	CategoryCard,
@@ -25,14 +25,14 @@ const Home = () => {
 				<div className="d-flex flex-column align-items-center">
 					{/* <Button variant="primary" onClick={() => handleShow} text="try launching modal" >
 					</Button> */}
-          <Modal
+          {/* <Modal
             title="this is modal title"
             handleShow={handleShow}
             handleClose={handleClose}
             isVisible={show}
           >
             this is body 
-          </Modal>
+          </Modal> */}
 					<CategoryCard />
 					<AddressCard />
 					<CheckoutCard />
