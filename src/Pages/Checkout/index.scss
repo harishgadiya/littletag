@@ -1,0 +1,11 @@
+@import '../../styles';
+
+.checkout {
+  display: flex;
+  .product-section {
+    width: 60%;
+  }
+  .price-section {
+    width: 40%;
+  }
+}

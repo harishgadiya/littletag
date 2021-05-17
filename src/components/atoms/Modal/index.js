@@ -1,14 +1,10 @@
-import ModalDialog from "react-bootstrap/ModalDialog";
+import Modal from "react-bootstrap/Modal";
+import Button from "../Button";
+// import ModalDialog from "react-bootstrap/ModalDialog";
 
-const Modal = ({ title, children, handleClose, handleShow, isVisible = false }) => {
-    console.log(isVisible, '>>>>>')
-    debugger
+const CustomModal = ({ title, children, handleClose, isVisible = false }) => {
 	return (
 		<>
-			<Button variant="primary" onClick={handleShow}>
-				Launch demo modal
-			</Button>
-
 			<Modal show={isVisible} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>{title}</Modal.Title>
@@ -27,4 +23,4 @@ const Modal = ({ title, children, handleClose, handleShow, isVisible = false }) 
 	);
 };
 
-export default Modal;
+export default CustomModal;

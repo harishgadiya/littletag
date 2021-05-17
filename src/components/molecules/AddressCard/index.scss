@@ -3,11 +3,8 @@
 .address-card {
   display: flex;
   flex-direction: column;
-  padding: 16px 24px;
-  border-radius: 12px;
-  background-color: $primary-color-H;
-  width: 650px;
-  margin: 12px;
+  width: 680px;
+  margin: 12px 0;
   .tag-edit {
     display: flex;
     justify-content: space-between;

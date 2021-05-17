@@ -14,6 +14,7 @@ nav.navbar {
   @include flex-center();
   background-color: $primary-color-H;
   nav {
+    padding: 20px 0 10px;
     flex: 1;
     ul {
       @include flex-center();
@@ -32,5 +33,9 @@ nav.navbar {
   }
   .icon {
     margin: 0 10px;
+  }
+  .heart {
+    height: 36px;
+    width: 36px;
   }
 }

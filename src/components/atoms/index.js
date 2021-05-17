@@ -11,5 +11,23 @@ import Checkbox from './Checkbox';
 import Radio from './Radio';
 import Card from './Card';
 import Container from './Container';
+import Popup from './Popup';
+import Dropdown from './Dropdown';
 
-export { Body, Button, Icon, Image, Price, Tag, Title, Circle, TextInput, Checkbox, Radio, Card, Container };
+export {
+  Body,
+  Button,
+  Icon,
+  Image,
+  Price,
+  Tag,
+  Title,
+  Circle,
+  TextInput,
+  Checkbox,
+  Radio,
+  Card,
+  Container,
+  Popup,
+  Dropdown,
+};

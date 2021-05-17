@@ -1,23 +1,23 @@
 import { Route, Switch } from 'react-router-dom';
 
-import Header from './components/molecules/Header';
-
-import { Home, Product } from './Pages';
+import { Checkout, Home, Product, Listing, Wishlist, ProfileDetails } from './Pages';
+import PageTemplate from './components/templates/PageTemplate';
 
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Footer } from './components/molecules';
 
 function App() {
   return (
-    <>
-      <Header />
+    <PageTemplate>
       <Switch>
         <Route path='/products' component={Product} />
+        <Route path='/listing' component={Listing} />
+        <Route path='/wishlist' component={Wishlist} />
+        <Route path='/checkout' component={Checkout} />
+        <Route path='/profile' component={ProfileDetails} />
         <Route path='/' component={Home} />
       </Switch>
-      <Footer />
-    </>
+    </PageTemplate>
   );
 }
 

@@ -1,4 +1,17 @@
-import { user, search, checkout, heart, edit, plus, minus, social } from '../../../assests/svg-icons';
+import {
+  user,
+  search,
+  checkout,
+  heart,
+  edit,
+  plus,
+  minus,
+  social,
+  facebook,
+  gmail,
+  or,
+  wishlist,
+} from '../../../assests/svg-icons';
 
 import './index.scss';
 
@@ -12,6 +25,8 @@ const getSvgIcon = (name) => {
       return checkout;
     case 'heart':
       return heart;
+    case 'wishlist':
+      return wishlist;
     case 'edit':
       return edit;
     case 'plus':
@@ -20,13 +35,19 @@ const getSvgIcon = (name) => {
       return minus;
     case 'social':
       return social;
+    case 'facebook':
+      return facebook;
+    case 'gmail':
+      return gmail;
+    case 'or':
+      return or;
     default:
       return null;
   }
 };
 
-const Icon = ({ name = 'user' }) => {
-  return <img className='icon' src={getSvgIcon(name)}></img>;
+const Icon = ({ name = 'user', className, ...other }) => {
+  return <img className={`icon ${className}`} src={getSvgIcon(name)} {...other}></img>;
 };
 
 export default Icon;

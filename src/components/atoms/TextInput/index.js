@@ -1,8 +1,9 @@
 import './index.scss';
 
-const TextInput = ({ text, ...other }) => {
+const TextInput = ({ text, label, ...other }) => {
   return (
     <div className='input-text'>
+      {label && <h5>{label}</h5>}
       <input value={text} {...other} />
     </div>
   );

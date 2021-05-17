@@ -1,0 +1,16 @@
+@import '../../../styles';
+
+.category-products {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

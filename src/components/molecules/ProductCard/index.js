@@ -1,7 +1,7 @@
 import { Body, Button, Card, Icon, Image, Price, Tag, Title } from '../../atoms';
 import './index.scss';
 
-const ProductCard = () => {
+const ProductCard = ({ type, iconName = 'heart', button1, button2 }) => {
   return (
     <Card className='product-card'>
       <div className='image-area'>
@@ -11,17 +11,19 @@ const ProductCard = () => {
         />
         <div className='offer-price-wishlist'>
           <Tag className='offer-price' {...{ text: '- 36 %' }} />
-          <Icon name='heart' />
+          <Icon name={iconName} />
         </div>
       </div>
       <div className='description-area'>
         <Title {...{ text: 'Product Title' }} />
         <Body {...{ text: 'product descript thinks' }} />
         <Price {...{ currentPrice: '350', previousPrice: '430' }} />
-        <div className='action-buttons'>
-          <Button {...{ text: 'Add to cart', type: 'outline' }} />
-          <Button {...{ text: 'Buy now' }} />
-        </div>
+        {type !== 'trending' && (
+          <div className='action-buttons'>
+            <Button {...{ text: button1?.text || 'Add to cart', type: 'outline' }} />
+            <Button {...{ text: button2?.text || 'Buy now' }} />
+          </div>
+        )}
       </div>
     </Card>
   );

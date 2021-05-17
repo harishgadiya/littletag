@@ -1,0 +1,26 @@
+@import '../../../styles';
+
+.checkout-products {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+  .checkout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .address {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      h3 {
+        margin-right: 32px;
+      }
+    }
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

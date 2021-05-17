@@ -1,0 +1,43 @@
+@import '../../../styles';
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  .heading {
+    font-size: $heading-size-1;
+    span {
+      font-size: $heading-size-3;
+    }
+  }
+  .action-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px 16px;
+    .icon {
+      width: 250px;
+      height: 50px;
+      margin: 12px 0;
+    }
+    .or {
+      width: 400px;
+    }
+    .input-text {
+      width: 320px;
+      height: 42px;
+      margin: 12px 0;
+      min-width: 320px;
+      input {
+        padding: 8px 12px;
+      }
+    }
+    .button,
+    .body-copy {
+      margin: 12px 0;
+    }
+  }
+}

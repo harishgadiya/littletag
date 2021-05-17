@@ -6,5 +6,9 @@ import edit from './edit.svg';
 import plus from './plus.svg';
 import minus from './minus.svg';
 import social from './social.svg';
+import facebook from './facebook.svg';
+import gmail from './gmail.svg';
+import or from './or.svg';
+import wishlist from './wishlist.svg';
 
-export { user, search, checkout, heart, edit, plus, minus, social };
+export { user, search, checkout, heart, edit, plus, minus, social, facebook, gmail, or, wishlist };

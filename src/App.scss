@@ -12,3 +12,51 @@ nav {
   font-weight: 500;
   letter-spacing: 0;
 }
+
+@for $i from 1 through 4 {
+  .p-#{$i} {
+    padding: $i * 4px;
+  }
+  .m-#{$i} {
+    margin: $i * 4px;
+  }
+}
+
+h1 {
+  font-size: $heading-size-1;
+  line-height: $heading-size-1;
+}
+
+h2 {
+  font-size: $heading-size-2;
+  line-height: $heading-size-2;
+}
+
+h3 {
+  font-size: $heading-size-3;
+  line-height: $heading-size-3;
+}
+
+h4 {
+  font-size: $heading-size-4;
+  line-height: $heading-size-4;
+}
+
+h5 {
+  font-size: $heading-size-5;
+  line-height: $heading-size-5;
+}
+
+h6 {
+  font-size: $heading-size-6;
+  line-height: $heading-size-6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}

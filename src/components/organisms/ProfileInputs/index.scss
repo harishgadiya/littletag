@@ -1,0 +1,10 @@
+@import '../../../styles';
+
+.profile-inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+  .input-text {
+    min-width: 310px;
+  }
+}

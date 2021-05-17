@@ -1,51 +1,38 @@
-import React, { useState } from "react";
-// import Modal from "bootstrap/Modal";
-import { Checkbox, Container, Radio } from "../components/atoms";
-import {
-	AddressCard,
-	CategoryCard,
-	CheckoutCard,
-	ProductCard,
-} from "../components/molecules";
-import Hero from "../components/organisms/Hero";
+import React from 'react';
+import { Container } from '../components/atoms';
+import { CategoryProducts, Hero, TrendingProducts } from '../components/organisms';
 
 const Home = () => {
-  const [show, setShow] = useState(false);
+  const trendingProducts = {
+    heading: 'Trending Products',
+    cards: [{}, {}, {}, {}, {}, {}, {}, {}],
+  };
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-	return (
-		<>
-			<div className="container-fluid">
-				<div className="row">
-					<Hero />
-				</div>
-			</div>
-			<Container>
-				<div className="d-flex flex-column align-items-center">
-					{/* <Button variant="primary" onClick={() => handleShow} text="try launching modal" >
-					</Button> */}
-          {/* <Modal
-            title="this is modal title"
-            handleShow={handleShow}
-            handleClose={handleClose}
-            isVisible={show}
-          >
-            this is body 
-          </Modal> */}
-					<CategoryCard />
-					<AddressCard />
-					<CheckoutCard />
-					<Checkbox label="checkbox 1" />
-					<Checkbox label="checkbox 2" />
-					<Radio name="durgesh" label="Radio 1" />
-					<Radio name="durgesh" label="Radio 2" />
-					<ProductCard />
-					<CheckoutCard />
-				</div>
-			</Container>
-		</>
-	);
+  const trendingProductsInIndeanWear = {
+    heading: 'Trending in Indian wear',
+    cards: [{}, {}, {}, {}],
+  };
+
+  const menCategoryProducts = {
+    heading: 'Men',
+    cards: [{}, {}, {}, {}, {}, {}, {}, {}],
+  };
+
+  const womenCategoryProducts = {
+    heading: 'Women',
+    cards: [{}, {}, {}, {}],
+  };
+  return (
+    <>
+      <Hero />
+      <Container>
+        <TrendingProducts {...trendingProducts} />
+        <CategoryProducts {...menCategoryProducts} />
+        <CategoryProducts {...womenCategoryProducts} />
+        <TrendingProducts {...trendingProductsInIndeanWear} />
+      </Container>
+    </>
+  );
 };
 
 export default Home;
