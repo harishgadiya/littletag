@@ -1,7 +1,3 @@
-import './index.scss';
-
-const Container = ({ children, className }) => {
-  return <div className={`litle-container ${className}`}>{children}</div>;
-};
+import Container from './Container';
 
 export default Container;

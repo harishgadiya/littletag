@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Container } from '../components/atoms';
-import { CategoryProducts, Hero, TrendingProducts } from '../components/organisms';
+import {
+  CategoryProducts,
+  Hero,
+  TrendingProducts,
+} from '../components/organisms';
+import { addProductToCheckout } from '../redux/actions/checkoutActions';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addProductToCheckout());
+  }, []);
+
+  const products = useSelector((state) => state.checkout);
+  console.log(`Products from store: ${JSON.stringify(products)}`);
+
   const trendingProducts = {
     heading: 'Trending Products',
     cards: [{}, {}, {}, {}, {}, {}, {}, {}],

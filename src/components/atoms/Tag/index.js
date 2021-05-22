@@ -1,11 +1,3 @@
-import './index.scss';
+import Tag from './Tag';
 
-const Title = ({ text, className, ...other }) => {
-  return (
-    <span className={`tag ${className}`} {...other}>
-      {text}
-    </span>
-  );
-};
-
-export default Title;
+export default Tag;

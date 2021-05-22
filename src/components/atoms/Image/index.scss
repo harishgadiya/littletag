@@ -1,9 +1,0 @@
-.little-image {
-  overflow: hidden;
-  img {
-    transition: transform 1s ease;
-    &:hover {
-      transform: scale(1.06, 1.06);
-    }
-  }
-}

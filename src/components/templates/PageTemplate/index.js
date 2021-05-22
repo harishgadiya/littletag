@@ -1,4 +1,4 @@
-import { Footer, Header } from '../../molecules';
+import { Footer, Header } from '../../organisms';
 
 const PageTemplate = ({ children }) => {
   return (

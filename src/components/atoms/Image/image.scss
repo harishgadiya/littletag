@@ -1,0 +1,10 @@
+.little-image {
+  border-radius: 8px;
+  overflow: hidden;
+  img {
+    transition: transform 1s ease;
+    &:hover {
+      transform: scale(1.06, 1.06);
+    }
+  }
+}

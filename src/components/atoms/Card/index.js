@@ -1,7 +1,3 @@
-import './index.scss';
-
-const Card = ({ children, className }) => {
-  return <div className={`little-card ${className}`}>{children}</div>;
-};
+import Card from './Card';
 
 export default Card;

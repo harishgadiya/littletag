@@ -1,7 +1,3 @@
-import './index.scss';
+import Zample from './Zample';
 
-const Sample = () => {
-  return <div>Sample</div>;
-};
-
-export default Sample;
+export default Zample;

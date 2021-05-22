@@ -1,0 +1,50 @@
+@import '../../../styles';
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+  .contact-us {
+    @include flex-center();
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 96px;
+    background-color: $primary-color-A;
+    .title {
+      color: $primary-color-J;
+      margin-bottom: 0;
+      font-weight: $font-medium;
+    }
+    .button {
+      margin-left: 32px;
+      background-color: $primary-color-A;
+      color: $primary-color-C;
+      font-weight: $font-medium;
+    }
+    .social-icon-group {
+      display: flex;
+      align-items: center;
+      .icon {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+  .quick-links-group {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 32px 0;
+    .quick-links {
+      display: flex;
+      flex-direction: column;
+      padding: 4px 16px;
+    }
+  }
+  .copyright {
+    .body-copy {
+      font-weight: $font-semibold;
+    }
+  }
+}

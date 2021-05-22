@@ -1,0 +1,34 @@
+@import '../../../styles';
+
+.product-card {
+  display: inline-flex;
+  flex-direction: column;
+  .image-area {
+    position: relative;
+    overflow: hidden;
+    .product-image {
+      max-width: 260px;
+      max-height: 325px;
+      border-radius: 6px;
+    }
+    .offer-price-wishlist {
+      position: absolute;
+      @include flex-center();
+      justify-content: space-between;
+      top: 0;
+      width: 100%;
+      padding: 5px;
+    }
+  }
+  .description-area {
+    padding: 8px;
+    .body-copy {
+      height: 50px;
+      overflow: hidden;
+    }
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
