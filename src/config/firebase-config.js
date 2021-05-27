@@ -2,7 +2,7 @@ import firebase from 'firebase';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const app = firebase.initializeApp({
+const firebaseConfig = firebase.initializeApp({
   apiKey: 'AIzaSyCb8263LItI0guaKCcY2BDXaSzVvJ61NjE',
   authDomain: 'littletags-cfec2.firebaseapp.com',
   projectId: 'littletags-cfec2',
@@ -12,9 +12,16 @@ const app = firebase.initializeApp({
   measurementId: 'G-CLTDG4GJ0K',
 });
 // Initialize Firebase
-// const app = firebase.initializeApp(firebaseConfig);
+let app = null;
+if (!firebase.apps.length) {
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app(); // if already initialized, use that one
+}
 firebase.analytics();
 
-export const auth = app.auth();
+export const auth = firebaseConfig.auth();
+
+export const firebaseDB = app.database().ref();
 
 export default firebase;

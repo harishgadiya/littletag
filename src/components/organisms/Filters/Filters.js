@@ -22,11 +22,11 @@ const Filters = () => {
   const colorsFilter = {
     title: 'Colors',
     items: [
-      { label: 'White' },
-      { label: 'Black' },
-      { label: 'Red' },
-      { label: 'Blue' },
-      { label: 'Green' },
+      { label: 'White', id: 'white' },
+      { label: 'Black', id: 'black' },
+      { label: 'Red', id: 'red' },
+      { label: 'Blue', id: 'blue' },
+      { label: 'Green', id: 'green' },
     ],
   };
   return (
@@ -34,9 +34,9 @@ const Filters = () => {
       <Title {...{ text: 'Filters' }} />
       <RangeFilter />
       <GenderFilter />
-      <RatingBarFilter />
-      <BrandsFilter {...brandsFilter} />
-      <ColorsFilter {...colorsFilter} />
+      <RatingBarFilter filter="rating" />
+      <BrandsFilter filter="brand" {...brandsFilter} />
+      <ColorsFilter filter="color" {...colorsFilter} />
     </Container>
   );
 };

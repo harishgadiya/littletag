@@ -1,21 +1,41 @@
 import { Body, Card, Icon, Tag, Title } from '../../atoms';
 import './addressCard.scss';
 
-const AddressCard = () => {
+const AddressCard = ({
+  id,
+  addresstype,
+  name,
+  mobileNo,
+  address,
+  locality,
+  landmark,
+  city,
+  state,
+  pinCode,
+  onEditAddressHandler,
+  onDeleteAddressHandler,
+}) => {
+  const onEditClickHandler = () => {
+    onEditAddressHandler({ id, addresstype, name, mobileNo, address, locality, landmark, city, state, pinCode });
+  };
+  const onDeleteClickHandler = () => {
+    onDeleteAddressHandler(id);
+  };
   return (
-    <Card className='address-card'>
-      <div className='tag-edit'>
-        <Tag {...{ text: 'Home' }} />
-        <Icon name='edit' />
+    <Card className="address-card">
+      <div className="tag-edit">
+        <Tag {...{ text: addresstype }} />
+        <div>
+          <Icon name="edit" onClick={onEditClickHandler} />
+          <Icon name="delete" onClick={onDeleteClickHandler} />
+        </div>
       </div>
-      <div className='name-mobile'>
-        <Title {...{ text: 'Durgesh Singh' }} />
-        <Title className='mobile' {...{ text: '9807025178' }} />
+      <div className="name-mobile">
+        <Title {...{ text: name }} />
+        <Title className="mobile" {...{ text: mobileNo }} />
       </div>
-      <div className='address'>
-        <Body
-          {...{ text: 'House number: 3817, Gali Number 72 Moradabad Extension, New Delhi, Delhi - 110044' }}
-        />
+      <div className="address">
+        <Body {...{ text: `${address}, ${locality}(${landmark}), ${city}, ${state} - ${pinCode}` }} />
       </div>
     </Card>
   );

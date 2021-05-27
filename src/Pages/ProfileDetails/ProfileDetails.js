@@ -3,31 +3,63 @@ import ProfileInputs from '../../components/organisms/ProfileInputs';
 import Title from '../../components/atoms/Title';
 import AddressCard from '../../components/molecules/AddressCard';
 import { Button } from '../../components/atoms';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AddressPopup } from '../../components/organisms';
 
 import './profileDetails.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAddress, fetchUser } from '../../api/userAPIs';
 
 const ProfileDetails = () => {
-  const [addressPopup, setAddressPopup] = useState(false);
+  const [addressPopupShow, setAddressPopupShow] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
-  const addressBooks = [{}, {}, {}];
+  useEffect(() => {
+    if (!user?.mobileNumber) {
+      fetchUser(dispatch);
+    }
+  }, [dispatch]);
 
   const addressPopupHandler = () => {
-    setAddressPopup((prev) => !prev);
+    setAddressPopupShow((prev) => !prev);
+  };
+  const onEditAddressHandler = (selectedAdd) => {
+    setSelectedAddress(selectedAdd);
+    addressPopupHandler();
+  };
+  const onDeleteAddressHandler = (addressId) => {
+    if (window && window.confirm('Are you sure to delete this address?')) {
+      deleteAddress(user.id, addressId);
+    }
   };
   return (
-    <Container className='profile-details'>
+    <Container className="profile-details">
       <h1>Profile Details</h1>
-      <div className='main-content'>
-        <ProfileInputs />
+      <div className="main-content">
+        <ProfileInputs {...user} />
         <Title {...{ text: 'Address Books' }} />
-        {addressBooks.map((item, index) => (
-          <AddressCard key={index} {...item} />
+        {user?.addressList?.map((item, index) => (
+          <AddressCard key={index} {...item} {...{ onEditAddressHandler, onDeleteAddressHandler }} />
         ))}
-        <Button {...{ text: '+ ADD NEW ADDRESS', onClick: addressPopupHandler }} />
+        <Button
+          {...{
+            text: '+ ADD NEW ADDRESS',
+            onClick: addressPopupHandler,
+          }}
+        />
       </div>
-      {addressPopup && <AddressPopup />}
+      {addressPopupShow && (
+        <AddressPopup
+          {...{
+            isPopupShow: addressPopupShow,
+            onCloseHandler: addressPopupHandler,
+            userId: user.id,
+            selectedAddress,
+          }}
+        />
+      )}
     </Container>
   );
 };

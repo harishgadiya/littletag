@@ -1,24 +1,71 @@
+import { Radio } from '../../atoms';
 import TextInput from '../../atoms/TextInput';
 
 import './profileInputs.scss';
 
-const ProfileInputs = () => {
+const ProfileInputs = ({ name, email, mobileNumber, gender }) => {
   return (
-    <div className='profile-inputs'>
-      <div className='row mt-3'>
-        <div className='col-md-6'>
-          <TextInput {...{ label: 'Name', placeHolder: 'Enter name' }} />
+    <div className="profile-inputs">
+      <div className="row mt-3">
+        <div className="col-md-6">
+          <TextInput
+            {...{
+              label: 'Name',
+              placeholder: 'Enter name',
+              text: name,
+            }}
+          />
         </div>
-        <div className='col-md-6'>
-          <TextInput {...{ label: 'Email', text: 'singh.durgesh2011@gmail.com', disabled: true }} />
+        <div className="col-md-6">
+          <TextInput
+            {...{
+              label: 'Email',
+              text: email,
+              disabled: true,
+              placeholder: 'Enter email',
+            }}
+          />
         </div>
       </div>
-      <div className='row  mt-3'>
-        <div className='col-md-6'>
-          <TextInput {...{ label: 'Mobile Number', text: '9807025178', disabled: true }} />
+      <div className="row  mt-3">
+        <div className="col-md-6">
+          <TextInput
+            {...{
+              label: 'Mobile Number',
+              text: mobileNumber,
+              disabled: true,
+              placeholder: 'Enter mobile',
+            }}
+          />
         </div>
-        <div className='col-md-6'>
-          <TextInput {...{ label: 'Alternate Number', text: '9555843620', disabled: true }} />
+        <div className="col-md-6">
+          <TextInput
+            {...{
+              label: 'Alternate Number',
+              text: mobileNumber,
+              disabled: true,
+              placeholder: 'Enter alternate number',
+            }}
+          />
+        </div>
+      </div>
+      <div className="row flex-nowrap mt-3">
+        <div className="col-md-5 d-flex justify-content-between align-items-center">
+          <h5>Gender :</h5>
+          <Radio
+            {...{
+              label: 'Male',
+              name: 'gender',
+              checked: gender?.toLowerCase() === 'male',
+            }}
+          />
+          <Radio
+            {...{
+              label: 'Female',
+              name: 'gender',
+              checked: gender?.toLowerCase() === 'female',
+            }}
+          />
         </div>
       </div>
     </div>

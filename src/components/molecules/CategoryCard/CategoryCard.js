@@ -1,15 +1,18 @@
+import { Link } from 'react-router-dom';
 import { Card, Image, Title } from '../../atoms';
 
 import './categoryCard.scss';
 
-const CategoryCard = () => {
+const CategoryCard = ({ image, link }) => {
   return (
-    <Card className='category-card'>
-      <Image
-        className='product-image'
-        {...{ src: 'https://picsum.photos/seed/picsum/260/325', alt: 'pics' }}
-      />
-      <Title {...{ text: 'Product Title' }} />
+    <Card className="category-card">
+      <Link to={link}>
+        <Image
+          className="product-image"
+          {...{ src: image, alt: 'pics' }}
+        />
+        <Title {...{ text: 'Product Title' }} />
+      </Link>
     </Card>
   );
 };

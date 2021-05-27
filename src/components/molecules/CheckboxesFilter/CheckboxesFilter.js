@@ -1,74 +1,61 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import { Checkbox, Title } from '../../atoms';
+import { Button, Checkbox, Title } from '../../atoms';
 import { addQuery } from '../index';
 import { useHistory } from 'react-router-dom';
-import { setBrand as setBrandAction } from '../../../redux/actions/filterActions';
+import { setFilter as setFilterAction } from '../../../redux/actions/filterActions';
 import './checkboxesFilter.scss';
 
-const list = [];
+let list = {
+  brand: [],
+  color: [],
+};
 
-const CheckboxesFilter = ({ title, items, setBrand }) => {
+const CheckboxesFilter = ({ title, items, setFilter, filter }) => {
   const history = useHistory();
   const { search } = history.location;
   const values = queryString.parse(search);
-  // const selectedBrand = values?.brand?.split(',') || [];
-  // if (
-  //   selectedBrand.length &&
-  //   list.some((s) => selectedBrand.indexOf(s) === -1)
-  // ) {
-  //   // list.push(selectedBrand);
-  // }
   const handleChange = (e) => {
     const { id, checked } = e.target;
-    const index = list.indexOf(id);
+    const index = list[filter].indexOf(id);
     if (!checked && index > -1) {
-      list.splice(index, 1);
+      list[filter].splice(index, 1);
     } else {
-      // list.push(selectedBrand);
-      list.push(id);
+      list[filter].push(id);
     }
-    // if (list.length > 1) {
-    //   list.join();
-    // }
-    // all.join(',');
-    setBrand(list);
-    // addQuery(`gender=${id}`);
-    // if (search) {
-    //   const createSearch = search.includes('brand')
-    //     ? `${search}&brand=${[id].join}`
-    //     : `${search}&brand=${id}`;
-    //   history.push({
-    //     pathname: '/listing',
-    //     search: createSearch,
-    //   });
-    // }
-    addQuery(history, 'brand', list);
-    // if (list.length) {
-    // } else if (values) {
-    //   delete values?.brand;
-    //   history.replace({
-    //     search: JSON.stringify(values),
-    //   });
-    // }
-
-    // history.push({
-    //   pathname: '/listing',
-    //   search: `brand=${list}`,
-    // });
+    setFilter({ [filter]: list[filter] });
+    addQuery(history, filter, list[filter]);
   };
 
+  const clearFilter = () => {
+    setFilter({ [filter]: null });
+    addQuery(history, filter, null);
+    list[filter] = [];
+  };
+  useEffect(() => {
+    if (values?.[filter]) {
+      setFilter({ [filter]: values?.[filter] });
+    }
+  }, []);
   return (
     <section className="checkboxes-filter">
-      <Title {...{ text: title }} />
+      <div className="filter-header">
+        <Title {...{ text: title }} />
+        {values?.[filter]?.length && (
+          <Button type="link" text="Clear" onClick={clearFilter} />
+        )}
+      </div>
       {items.map((item) => {
         return (
           <Checkbox
             key={item.id}
             {...item}
             onChange={handleChange}
-            checked={values?.brand?.split(',').indexOf(item.id) > -1}
+            checked={
+              values?.[filter]?.split(',').indexOf(item.id) > -1
+            }
           />
         );
       })}
@@ -84,7 +71,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setBrand: (id) => dispatch(setBrandAction(id)),
+    setFilter: (id) => dispatch(setFilterAction(id)),
   };
 };
 

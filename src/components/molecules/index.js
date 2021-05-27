@@ -15,6 +15,10 @@ export const addQuery = (history, key, value) => {
   let searchParams = new URLSearchParams(history.location.search);
   // returns the existing query string: '?type=fiction&author=fahid'
   searchParams.set(key, value);
+  if (!value?.length) {
+    console.log(searchParams);
+    searchParams.delete(key);
+  }
   history.push({
     pathname: pathname,
     search: searchParams.toString(),

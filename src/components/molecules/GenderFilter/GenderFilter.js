@@ -1,12 +1,12 @@
 // import { useState } from 'react';
-import { createRef } from 'react';
+import { createRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 
 import { addQuery } from '..';
 import setGenderAction from '../../../redux/actions/filterActions';
-import { Radio, Title } from '../../atoms';
+import { Button, Radio, Title } from '../../atoms';
 import './genderFilter.scss';
 
 const genderList = [
@@ -32,21 +32,34 @@ const GenderFilter = (props) => {
       e.target.checked = true;
     }
     addQuery(history, 'gender', id);
-    // history.push({
-    //   pathname: '/listing',
-    //   search: `gender=${id}`,
-    // });
   };
 
+  const clearFilter = () => {
+    props.setGender(null);
+    addQuery(history, 'gender', null);
+    // addQuery(history, 'gender', id);
+  };
+
+  useEffect(() => {
+    if (values?.gender) {
+      props.setGender(values?.gender);
+    }
+  }, []);
+  console.log(props.selectedGender, '>>>>>>>>>.');
   return (
     <section className="gender-filter">
-      <Title {...{ text: 'Gender' }} />
+      <div className="filter-header">
+        <Title {...{ text: 'Gender' }} />
+        {props.selectedGender && (
+          <Button type="link" text="Clear" onClick={clearFilter} />
+        )}
+      </div>
       {genderList.map((gender) => (
         <Radio
           {...{ label: gender.label, name: 'gender', id: gender.id }}
           onChange={handleChange}
           ref={inputRef}
-          checked={values?.gender === gender.id}
+          checked={props.selectedGender === gender.id}
         />
       ))}
       {/* <Radio {...{ label: 'Female', name: 'gender', id: "female" }} onChange={handleChange} /> */}
@@ -58,7 +71,7 @@ const GenderFilter = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    selectedGender: state.gender,
+    selectedGender: state.filterReducer.gender,
   };
 };
 

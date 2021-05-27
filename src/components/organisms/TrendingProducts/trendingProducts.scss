@@ -11,6 +11,11 @@
   .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    .image-area {
+      flex: 1;
+    }
+    .col-lg-3 {
+      width: 18%;
+    }
   }
 }

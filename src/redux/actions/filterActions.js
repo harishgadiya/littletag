@@ -11,4 +11,9 @@ export const setBrand = (data) => ({
   payload: data,
 });
 
+export const setFilter = (data) => ({
+  type: filterType.SET_FILTER,
+  payload: data,
+});
+
 export default setGender;

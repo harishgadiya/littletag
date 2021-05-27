@@ -15,6 +15,7 @@ import {
   facebook,
   twitter,
   instagram,
+  deleteIcon,
 } from '../../../assests/svg-icons';
 
 import './icon.scss';
@@ -57,6 +58,8 @@ const getSvgIcon = (name) => {
       return facebook;
     case 'loginGmail':
       return instagram;
+    case 'delete':
+      return deleteIcon;
     default:
       return null;
   }

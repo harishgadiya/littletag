@@ -11,11 +11,9 @@ import queryString from 'query-string';
 import './listing.scss';
 
 const Listing = (props) => {
-  const { productList, loading, genderFilter, selectedBrand } = props;
+  const { productList, loading, genderFilter, selectedBrand, user } = props;
   const { search } = useLocation();
   const values = queryString.parse(search);
-  console.log(search, 'helesljfklds', values);
-
   let filteredProducts = productList.products;
   // if (genderFilter || selectedBrand) {
   //   filteredProducts = productList.products.filter(
@@ -33,7 +31,15 @@ const Listing = (props) => {
         (values.brand &&
           values.brand
             .split(',')
-            .indexOf(product.brand.toLowerCase()) > -1)
+            .indexOf(product.brand.toLowerCase()) > -1) ||
+        (values.color &&
+          values.color
+            .split(',')
+            .indexOf(product.color.toLowerCase()) > -1) ||
+        (values.rating &&
+          values.rating
+            .split(',')
+            .indexOf(product.rating.toString()) > -1)
       ) {
         productList.push(product);
         return product;
@@ -62,10 +68,12 @@ const Listing = (props) => {
       <div className="filter-section">
         <Filters />
       </div>
-      <div className="products-section">
+      <div className="products-section row">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((item) => (
-            <ProductCardItems key={item.id} {...item} />
+            // <div key={item.id} className="col-lg-3">
+            <ProductCardItems key={item.id} className="col-lg-3" {...item} {...{ userId: user.id }} />
+            // </div>
           ))
         ) : (
           <h2>No Result found</h2>
@@ -81,16 +89,15 @@ const mapStateToProps = (state) => {
     loading: state.products.loading,
     genderFilter: state.filterReducer.gender,
     selectedBrand: state.filterReducer.brand,
+    user: state.user,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onAction: () => dispatch(fetchProducts()),
+    dispatch,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withRouter(Listing));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Listing));

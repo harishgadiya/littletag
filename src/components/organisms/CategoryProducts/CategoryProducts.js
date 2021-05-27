@@ -7,11 +7,13 @@ const CategoryProducts = ({ heading, cards }) => {
     <div className="category-products">
       <div className="category-header">
         <h2>{heading}</h2>
-        <Button {...{ type: 'link', text: 'SEE ALL' }} />
+        <Button
+          {...{ type: 'link', href: '/listing', text: 'SEE ALL' }}
+        />
       </div>
       <div className="cards">
         {cards.map((item, index) => (
-          <CategoryCard key={index} />
+          <CategoryCard key={index} {...item} />
         ))}
       </div>
     </div>

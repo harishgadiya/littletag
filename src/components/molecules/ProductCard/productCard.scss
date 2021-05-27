@@ -6,10 +6,16 @@
   .image-area {
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-color-J;
+    border-radius: 12px;
     .product-image {
       max-width: 260px;
       max-height: 325px;
       border-radius: 6px;
+      min-width: 100%;
     }
     .offer-price-wishlist {
       position: absolute;
@@ -22,6 +28,10 @@
   }
   .description-area {
     padding: 8px;
+    .title {
+      height: 24px;
+      overflow: hidden;
+    }
     .body-copy {
       height: 50px;
       overflow: hidden;

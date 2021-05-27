@@ -14,6 +14,7 @@ import starFilled from './star-filled.svg';
 import facebook from './facebook.svg';
 import instagram from './instagram.svg';
 import twitter from './twitter.svg';
+import deleteIcon from './delete-filled.svg';
 
 export {
   user,
@@ -32,4 +33,5 @@ export {
   facebook,
   instagram,
   twitter,
+  deleteIcon,
 };
