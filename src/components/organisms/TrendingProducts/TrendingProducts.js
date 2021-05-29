@@ -1,5 +1,4 @@
 import { Button } from '../../atoms';
-import { ProductCard } from '../../molecules';
 import { ProductCardItems } from '../../molecules/ProductCard';
 import './trendingProducts.scss';
 
@@ -13,7 +12,7 @@ const TrendingProducts = ({ heading, cards }) => {
       <div className="cards row">
         {cards?.map((item, index) => (
           <ProductCardItems
-            key={item?.product?.id}
+            key={item?.product?.wishlistId}
             className="col-lg-3"
             key={index}
             type="trending"
@@ -21,6 +20,12 @@ const TrendingProducts = ({ heading, cards }) => {
             {...item.product}
           />
         ))}
+        {!cards ||
+          (cards.length < 1 && (
+            <div className="m-4 p-4 d-flex justify-content-center">
+              <h4>No products are marked as wishlist</h4>
+            </div>
+          ))}
       </div>
     </div>
   );

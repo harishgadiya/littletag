@@ -15,6 +15,17 @@
       h3 {
         margin-right: 32px;
       }
+      select {
+        width: 200px;
+        padding: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid $primary-color-A;
+        background-color: $primary-color-E;
+        border-radius: 12px;
+        box-sizing: border-box;
+      }
     }
   }
   .cards {

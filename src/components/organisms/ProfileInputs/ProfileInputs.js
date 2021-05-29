@@ -1,9 +1,30 @@
-import { Radio } from '../../atoms';
+import { useEffect, useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
+import { updateUserInfo } from '../../../api/userAPIs';
+import { TOAST_TEXT, TOAST_TYPE } from '../../../utils/constants/toast';
+import { Button, Radio } from '../../atoms';
 import TextInput from '../../atoms/TextInput';
 
 import './profileInputs.scss';
 
-const ProfileInputs = ({ name, email, mobileNumber, gender }) => {
+const ProfileInputs = ({ id, name, email, mobileNumber, alternateNumber, gender, addressList }) => {
+  const [state, setState] = useState({ name: '', email: '', mobileNumber: '', alternateNumber: '', gender: '' });
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const { addToast } = useToasts();
+
+  useEffect(() => {
+    setState({ name, mobileNumber, alternateNumber, gender });
+  }, [name, mobileNumber, alternateNumber, gender]);
+
+  const onChangeHandler = ({ target: { name, value } }) => {
+    setState({ ...state, [name]: value });
+    buttonDisabled && setButtonDisabled(false);
+  };
+  const onSaveHandler = () => {
+    updateUserInfo(id, { ...state, email, addressList });
+    addToast(TOAST_TEXT.USER_DETAILS_UPDATED_SUCCESSFULLY, TOAST_TYPE.SUCCESS);
+    !buttonDisabled && setButtonDisabled(true);
+  };
   return (
     <div className="profile-inputs">
       <div className="row mt-3">
@@ -12,7 +33,9 @@ const ProfileInputs = ({ name, email, mobileNumber, gender }) => {
             {...{
               label: 'Name',
               placeholder: 'Enter name',
-              text: name,
+              text: state?.name,
+              name: 'name',
+              onChange: onChangeHandler,
             }}
           />
         </div>
@@ -32,9 +55,10 @@ const ProfileInputs = ({ name, email, mobileNumber, gender }) => {
           <TextInput
             {...{
               label: 'Mobile Number',
-              text: mobileNumber,
-              disabled: true,
               placeholder: 'Enter mobile',
+              text: state?.mobileNumber,
+              name: 'mobileNumber',
+              onChange: onChangeHandler,
             }}
           />
         </div>
@@ -42,9 +66,10 @@ const ProfileInputs = ({ name, email, mobileNumber, gender }) => {
           <TextInput
             {...{
               label: 'Alternate Number',
-              text: mobileNumber,
-              disabled: true,
               placeholder: 'Enter alternate number',
+              text: state?.alternateNumber,
+              name: 'alternateNumber',
+              onChange: onChangeHandler,
             }}
           />
         </div>
@@ -56,17 +81,32 @@ const ProfileInputs = ({ name, email, mobileNumber, gender }) => {
             {...{
               label: 'Male',
               name: 'gender',
-              checked: gender?.toLowerCase() === 'male',
+              checked: state?.gender?.toLowerCase() === 'male',
+              value: 'male',
+              disabled: !!state?.gender,
+              onChange: !state?.gender ? onChangeHandler : undefined,
             }}
           />
           <Radio
             {...{
               label: 'Female',
               name: 'gender',
-              checked: gender?.toLowerCase() === 'female',
+              checked: state?.gender?.toLowerCase() === 'female',
+              value: 'female',
+              disabled: !!state?.gender,
+              onChange: !state?.gender ? onChangeHandler : undefined,
             }}
           />
         </div>
+      </div>
+      <div className="row  mt-3 save-button ">
+        <Button
+          {...{
+            text: 'SAVE',
+            onClick: onSaveHandler,
+            disabled: buttonDisabled,
+          }}
+        />
       </div>
     </div>
   );

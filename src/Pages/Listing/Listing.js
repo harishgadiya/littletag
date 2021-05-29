@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 import { Container } from '../../components/atoms';
 import { ProductCardItems } from '../../components/molecules/ProductCard';
 import { Filters } from '../../components/organisms';
-import fetchProducts from '../../redux/actions/productListingAction';
+import fetchProducts, { getWishlistCartInfoWithProducts } from '../../redux/actions/productListingAction';
 import queryString from 'query-string';
 
 import './listing.scss';
 
 const Listing = (props) => {
-  const { productList, loading, genderFilter, selectedBrand, user } = props;
+  const { productList, loading, genderFilter, selectedBrand, user, dispatch } = props;
   const { search } = useLocation();
   const values = queryString.parse(search);
+
   let filteredProducts = productList.products;
   // if (genderFilter || selectedBrand) {
   //   filteredProducts = productList.products.filter(
@@ -28,18 +29,10 @@ const Listing = (props) => {
     filteredProducts = filteredProducts.filter((product) => {
       if (
         product.gender.toLowerCase() === values.gender ||
-        (values.brand &&
-          values.brand
-            .split(',')
-            .indexOf(product.brand.toLowerCase()) > -1) ||
-        (values.color &&
-          values.color
-            .split(',')
-            .indexOf(product.color.toLowerCase()) > -1) ||
-        (values.rating &&
-          values.rating
-            .split(',')
-            .indexOf(product.rating.toString()) > -1)
+        (values.sTerm && product.title.toLowerCase().includes(values.sTerm.split(' ')[0].toLowerCase())) ||
+        (values.brand && values.brand.split(',').indexOf(product.brand.toLowerCase()) > -1) ||
+        (values.color && values.color.split(',').indexOf(product.color.toLowerCase()) > -1) ||
+        (values.rating && values.rating.split(',').indexOf(product.rating.toString()) > -1)
       ) {
         productList.push(product);
         return product;
@@ -55,25 +48,37 @@ const Listing = (props) => {
     props.onAction();
   }, []);
 
+  useEffect(() => {
+    if (user?.id) {
+      getWishlistCartInfoWithProducts(dispatch, user?.id);
+    }
+  }, [user?.id]);
+
   if (loading) {
     return (
       <div className="spin-center">
-        <Spinner animation="border" />;
+        <Spinner animation="border" />
       </div>
     );
   }
-
+  console.log('filteredProducts => ', filteredProducts);
   return (
     <Container className="listing-product">
       <div className="filter-section">
         <Filters />
+        {/* <Button type="link" text="Clear" onClick={clearFilter} /> */}
       </div>
       <div className="products-section row">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((item) => (
-            // <div key={item.id} className="col-lg-3">
-            <ProductCardItems key={item.id} className="col-lg-3" {...item} {...{ userId: user.id }} />
-            // </div>
+            <ProductCardItems
+              key={item.id}
+              className="col-lg-3"
+              {...item}
+              {...{
+                userId: user?.id,
+              }}
+            />
           ))
         ) : (
           <h2>No Result found</h2>
@@ -85,7 +90,7 @@ const Listing = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    productList: state.products,
+    productList: state?.products,
     loading: state.products.loading,
     genderFilter: state.filterReducer.gender,
     selectedBrand: state.filterReducer.brand,

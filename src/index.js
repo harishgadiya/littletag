@@ -2,21 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ToastProvider } from 'react-toast-notifications';
 
 import App from './App';
 import { store } from './redux/store';
-import reportWebVitals from './reportWebVitals'
+import reportWebVitals from './reportWebVitals';
 import UserProvider from './contexts/AuthContext';
 
 ReactDOM.render(
   <React.StrictMode>
-      <UserProvider>
-          <Router>
-            <Provider store={store}>
-              <App />
-            </Provider>
-          </Router>
-        </UserProvider>
+    <UserProvider>
+      <Router>
+        <Provider store={store}>
+          <ToastProvider>
+            <App />
+          </ToastProvider>
+        </Provider>
+      </Router>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

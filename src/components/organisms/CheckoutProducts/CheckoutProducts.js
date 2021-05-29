@@ -2,23 +2,29 @@ import { Dropdown } from '../../atoms';
 import { CheckoutCard } from '../../molecules';
 import './checkoutProducts.scss';
 
-const CheckoutProducts = ({ heading, products }) => {
+const CheckoutProducts = ({ heading, products, userId, addressList }) => {
   const addresses = {
     heading: 'Select address',
-    items: ['Address 1', 'Address 2', 'Address 3', 'Address 4'],
+    items: [
+      'Select address',
+      ...addressList?.map(
+        (item) =>
+          `${item.name}-${item.mobileNo}, ${item.address}, ${item.locality}, ${item.city}, ${item.state}-${item.pinCode}`,
+      ),
+    ],
   };
   return (
-    <div className='checkout-products'>
-      <div className='checkout-header'>
+    <div className="checkout-products">
+      <div className="checkout-header">
         <h2>{heading}</h2>
-        <div className='address'>
+        <div className="address">
           <h3>Delivery to</h3>
           <Dropdown {...addresses} />
         </div>
       </div>
-      <div className='cards'>
+      <div className="cards">
         {products.map((item, index) => (
-          <CheckoutCard key={index} {...item} />
+          <CheckoutCard key={index} {...item} {...{ userId }} />
         ))}
       </div>
     </div>

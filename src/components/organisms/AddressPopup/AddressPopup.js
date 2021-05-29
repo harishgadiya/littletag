@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addAddress } from '../../../api/userAPIs';
 import { STATES } from '../../../utils/constants/states';
 import { Button, Container, Dropdown, Popup, Radio, TextInput } from '../../atoms';
 import './addressPopup.scss';
 
-const AddressPopup = ({ isPopupShow, onCloseHandler, userId, selectedAddress }) => {
+const AddressPopup = ({ isPopupShow, onCloseHandler, userId, selectedAddress = {} }) => {
   const [isShow, setIsShow] = useState(isPopupShow);
-  const [state, setState] = useState(
-    selectedAddress || {
-      name: '',
-      mobileNo: '',
-      pinCode: '',
-      locality: '',
-      address: '',
-      city: '',
-      landmark: '',
-      state: '',
-      addresstype: 'Home',
-    },
-  );
+  const [state, setState] = useState({
+    name: '',
+    mobileNo: '',
+    pinCode: '',
+    locality: '',
+    address: '',
+    city: '',
+    landmark: '',
+    state: '',
+    addresstype: '',
+  });
+  useEffect(() => {
+    setState({ ...selectedAddress });
+  }, []);
 
   const onChangeHandler = ({ target: { name, value } }) => {
     setState({ ...state, [name]: value });

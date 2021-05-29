@@ -7,7 +7,7 @@ const Popup = ({ isShow, onCloseHandler, children }) => {
 
   const handleClose = () => {
     setShow(false);
-    onCloseHandler();
+    onCloseHandler?.();
   };
   return (
     <Modal className="littletags-popup" show={show} onHide={handleClose} keyboard={false} centered>

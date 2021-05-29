@@ -1,29 +1,37 @@
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import './dropdown.scss';
 
-const LittleTagDropdown = ({ items, className, onChangeHandler, selectProps }) => {
-  return (
-    // <Dropdown className={className}>
-    //   <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
-    //     {heading}
-    //   </Dropdown.Toggle>
-
-    //   <Dropdown.Menu>
-    //     {items.map((item, index) => (
-    //       <Dropdown.Item key={index} href="#" onSelect={(e) => console.log(e)}>
-    //         {item}
-    //       </Dropdown.Item>
-    //     ))}
-    //   </Dropdown.Menu>
-    // </Dropdown>
-    <select className={className} onChange={onChangeHandler} {...selectProps}>
-      {items.map((item, index) => (
-        <option key={index} value={item}>
-          {item}
-        </option>
-      ))}
-    </select>
-  );
+const LittleTagDropdown = ({ type = 'simple', items, className, onChangeHandler, selectProps }) => {
+  if (type === 'simple') {
+    return (
+      <select className={className} onChange={onChangeHandler} {...selectProps}>
+        {items?.map((item, index) => (
+          <option key={index} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
+    );
+  } else {
+    return (
+      <Dropdown
+        title="Dropdown button"
+        className={className}
+        onSelect={(a, e) => console.log('dropdown e =>', a, e.target.value)}
+      >
+        {items.map((item, index) => (
+          <Dropdown.Item
+            key={index}
+            href="#"
+            value={item}
+            onClick={(e) => console.log('dropdown item e =>', e.target.value)}
+          >
+            {item}
+          </Dropdown.Item>
+        ))}
+      </Dropdown>
+    );
+  }
 };
 
 export default LittleTagDropdown;

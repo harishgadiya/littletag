@@ -6,6 +6,7 @@
   color: $primary-color-B;
   height: 32px;
   width: 32px;
+  cursor: pointer;
   @include flex-center();
   overflow: hidden;
   span {

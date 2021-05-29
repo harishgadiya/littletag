@@ -1,6 +1,10 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { addProductToCart, addProductToWishlist } from '../../../api/productAPIs';
+import { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+
+import { addProductToCart, addProductToWishlist, removeProductFromWishlist } from '../../../api/productAPIs';
+import { BUTTON_TEXT, CARD_TYPE, WISHLIST_ICON_NAME } from '../../../utils/constants/button';
+import { TOAST_TEXT, TOAST_TYPE } from '../../../utils/constants/toast';
 import { Body, Button, Card, Icon, Image, Price, Tag, Title } from '../../atoms';
 import './productCard.scss';
 
@@ -31,9 +35,9 @@ const ProductCard = ({ type, iconName = 'heart', button1, button2 }) => {
 
 export const ProductCard1 = ({
   type,
-  iconName = 'heart',
-  button1,
-  button2,
+  iconName = WISHLIST_ICON_NAME.HEART,
+  button1 = { text: BUTTON_TEXT.ADD_TO_CART },
+  button2 = { text: BUTTON_TEXT.BUY_NOW },
   category,
   id,
   image,
@@ -42,20 +46,50 @@ export const ProductCard1 = ({
   title,
   userId,
   className,
+  wishlistId,
+  isAddedInWishlist,
+  isAddedInCheckout,
 }) => {
-  const [favIconName, setFavIconName] = useState(iconName);
+  const [favIconName, setFavIconName] = useState(isAddedInWishlist ? WISHLIST_ICON_NAME.WISHLIST : iconName);
+  const { addToast } = useToasts();
+  const history = useHistory();
 
   const onAddToCartHandler = () => {
+    if (isAddedInCheckout) {
+      history.push('/checkout');
+      return;
+    }
     addProductToCart(userId, {
       productId: id,
       quantity: 1,
     });
+    addToast(TOAST_TEXT.REMOVED_PRODUCT_IN_CART, TOAST_TYPE.SUCCESS);
   };
-  const onFavIconClickHandler = () => {
-    setFavIconName((prev) => (prev === 'heart' ? 'wishlist' : 'heart'));
-    addProductToWishlist(userId, {
-      productId: id,
-    });
+
+  const onFavIconClickHandler = (currentIconName) => {
+    if (type === CARD_TYPE.WISHLIST) {
+      onRemoveFromWishlistHandler();
+    } else {
+      if (currentIconName === WISHLIST_ICON_NAME.WISHLIST) {
+        addToast(TOAST_TEXT.PRODUCT_ALREADY_IN_WISHLIST, TOAST_TYPE.INFO);
+        return;
+      }
+      setFavIconName(WISHLIST_ICON_NAME.WISHLIST);
+      addProductToWishlist(userId, {
+        productId: id,
+      });
+      addToast(TOAST_TEXT.ADD_PRODUCT_IN_WISHLIST, TOAST_TYPE.SUCCESS);
+    }
+  };
+
+  const onRemoveFromWishlistHandler = () => {
+    removeProductFromWishlist(userId, wishlistId);
+    addToast(TOAST_TEXT.REMOVED_PRODUCT_FROM_WISHLIST, TOAST_TYPE.WARNING);
+  };
+
+  const onBuyNowClickHandler = () => {
+    //removeProductToWishlist(userId, wishlistId);
+    addToast(TOAST_TEXT.BUY_NOW, TOAST_TYPE.INFO);
   };
 
   return (
@@ -67,7 +101,10 @@ export const ProductCard1 = ({
 
         <div className="offer-price-wishlist">
           <Tag className="offer-price" {...{ text: '- 36 %' }} />
-          <Icon name={favIconName} onClick={onFavIconClickHandler} />
+          <Icon
+            name={isAddedInWishlist ? WISHLIST_ICON_NAME.WISHLIST : iconName}
+            onClick={() => onFavIconClickHandler(isAddedInWishlist ? WISHLIST_ICON_NAME.WISHLIST : iconName)}
+          />
         </div>
       </div>
       <div className="description-area">
@@ -76,8 +113,19 @@ export const ProductCard1 = ({
         <Price {...{ currentPrice: price, previousPrice: price }} />
         {type !== 'trending' && (
           <div className="action-buttons">
-            <Button {...{ text: button1?.text || 'Add to cart', type: 'outline', onClick: onAddToCartHandler }} />
-            <Button {...{ text: button2?.text || 'Buy now' }} />
+            <Button
+              {...{
+                text: isAddedInCheckout ? BUTTON_TEXT.GO_TO_CART : button1?.text,
+                type: 'outline',
+                onClick: onAddToCartHandler,
+              }}
+            />
+            <Button
+              {...{
+                text: button2?.text,
+                onClick: button2?.text === BUTTON_TEXT.REMOVE ? onRemoveFromWishlistHandler : onBuyNowClickHandler,
+              }}
+            />
           </div>
         )}
       </div>

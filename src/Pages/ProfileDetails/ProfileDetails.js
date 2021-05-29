@@ -15,19 +15,22 @@ const ProfileDetails = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  console.log('user => ', user);
   useEffect(() => {
     if (!user?.mobileNumber) {
       fetchUser(dispatch);
     }
   }, [dispatch]);
 
-  const addressPopupHandler = () => {
+  const addressPopupHandler = (type) => {
+    if (type !== 'edit') {
+      setSelectedAddress(null);
+    }
     setAddressPopupShow((prev) => !prev);
   };
   const onEditAddressHandler = (selectedAdd) => {
     setSelectedAddress(selectedAdd);
-    addressPopupHandler();
+    addressPopupHandler('edit');
   };
   const onDeleteAddressHandler = (addressId) => {
     if (window && window.confirm('Are you sure to delete this address?')) {

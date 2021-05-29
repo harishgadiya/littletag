@@ -1,8 +1,9 @@
 import { productTypes } from '../reducers/productListingReducers';
 import firebase from '../../config/firebase-config';
 
+import { wishlist, products, cart } from '../../api/productAPIs';
+
 export const fetchProductSuccess = (data) => {
-  console.log(data, 'sjflkasjfdasjflajdl;fdajsldfjs');
   return {
     type: productTypes.FETCH_PRODUCTS_SUCCESS,
     payload: data,
@@ -19,7 +20,6 @@ const fetchProducts = () => (dispatch) => {
   const productRef = firebase.database().ref('products');
   productRef.on('value', (snapshot) => {
     const products = snapshot.val();
-    console.log(products, '>>>>>>>');
     // setProductList(products['-Ma-62BeEXyOeArByzTg']);
     dispatch(fetchProductSuccess(products['-Ma-62BeEXyOeArByzTg']));
   });
@@ -30,3 +30,42 @@ const fetchProducts = () => (dispatch) => {
 // });
 
 export default fetchProducts;
+
+export const getWishlistCartInfoWithProducts = (dispatch, userId) => {
+  products.on('value', (productSnapshot) => {
+    if (productSnapshot.val() !== null) {
+      let productsData = productSnapshot.val();
+      wishlist.child(userId).on('value', (wishlistSnapshot) => {
+        if (wishlistSnapshot.val() !== null) {
+          const wishlistData = wishlistSnapshot.val();
+          const wishlistProducts = Object.keys(wishlistData).map((key) => ({
+            ...wishlistData[key],
+            id: key,
+          }));
+          productsData = productsData?.map((item) => {
+            if (wishlistProducts?.some((x) => x?.productId.toString() === item?.id?.toString())) {
+              item.isAddedInWishlist = true;
+            }
+            return item;
+          });
+        }
+        cart.child(userId).on('value', (cartSnapshot) => {
+          if (cartSnapshot.val() !== null) {
+            const checkoutData = cartSnapshot.val();
+            const cartProducts = Object.keys(checkoutData).map((key) => ({
+              ...checkoutData[key],
+              id: key,
+            }));
+            productsData = productsData?.map((item) => {
+              if (cartProducts?.some((x) => x?.productId.toString() === item?.id?.toString())) {
+                item.isAddedInCheckout = true;
+              }
+              return item;
+            });
+          }
+          dispatch(fetchProductSuccess(productsData));
+        });
+      });
+    }
+  });
+};

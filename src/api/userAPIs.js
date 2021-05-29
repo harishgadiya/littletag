@@ -5,7 +5,6 @@ import { errorFn } from './commonAPIs';
 const users = firebaseDB.child('users');
 
 export const createUser = () => {
-  console.log('started to push data');
   users.push(
     {
       name: 'Durgesh Singh',
@@ -30,7 +29,6 @@ export const fetchUser = (dispatch) => {
       if (user?.addressList) {
         user.addressList = Object.keys(user?.addressList).map((key) => ({ ...user?.addressList[key], id: key }));
       }
-      console.log('Fetched user => ', user);
       dispatch(getUser({ ...user }));
     }
   });
@@ -48,4 +46,8 @@ export const addAddress = (data, userId) => {
 
 export const deleteAddress = (userId, addressId) => {
   firebaseDB.child(`users/${userId}/addressList/${addressId}`).remove(errorFn);
+};
+
+export const updateUserInfo = (userId, data) => {
+  users.child(userId).set(data, errorFn);
 };

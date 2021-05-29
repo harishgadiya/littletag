@@ -16,7 +16,6 @@ const productListingReducer = (state = initialState, action) => {
         loading: true,
       };
     case 'FETCH_PRODUCTS_SUCCESS':
-      console.log(action, '>>>>>>>>>>>>.');
       return {
         ...state,
         products: action.payload,

@@ -3,9 +3,9 @@ import { getAllCheckoutProduct } from '../redux/actions/checkoutActions';
 import { getAllWishlistProduct } from '../redux/actions/wishlistActions';
 import { errorFn } from './commonAPIs';
 
-const cart = firebaseDB.child('cart');
-const wishlist = firebaseDB.child('wishlist');
-const products = firebaseDB.child('products/-Ma-62BeEXyOeArByzTg');
+export const cart = firebaseDB.child('cart');
+export const wishlist = firebaseDB.child('wishlist');
+export const products = firebaseDB.child('products/-Ma-62BeEXyOeArByzTg');
 
 export const addProductToCart = (userId, data) => {
   cart.child(userId).push(data, errorFn);
@@ -29,7 +29,10 @@ export const getCartProducts = (dispatch, userId) => {
           const productsDetails = cartProducts?.map((item) => {
             if (products?.filter((x) => x?.id?.toString() === item?.productId?.toString())) {
               return {
-                product: products?.find((x) => x?.id?.toString() === item?.productId?.toString()),
+                product: {
+                  ...products?.find((x) => x?.id?.toString() === item?.productId?.toString()),
+                  cartId: item.id,
+                },
                 quantity: item.quantity,
               };
             }
@@ -44,6 +47,14 @@ export const getCartProducts = (dispatch, userId) => {
       });
     }
   });
+};
+
+export const removeProductFromCart = (userId, cartId) => {
+  cartId && userId && cart.child(`${userId}/${cartId}`).remove(errorFn);
+};
+
+export const updateProductQuantityInCart = (userId, cartId, productId, quantity) => {
+  cartId && userId && cart.child(`${userId}/${cartId}`).set({ productId, quantity }, errorFn);
 };
 
 export const addProductToWishlist = (userId, data) => {
@@ -69,6 +80,7 @@ export const getWishlistProducts = (dispatch, userId) => {
             if (products?.filter((x) => x?.id?.toString() === item?.productId?.toString())) {
               return {
                 product: products?.find((x) => x?.id?.toString() === item?.productId?.toString()),
+                wishlistId: item.id,
               };
             }
           });
@@ -82,4 +94,8 @@ export const getWishlistProducts = (dispatch, userId) => {
       });
     }
   });
+};
+
+export const removeProductFromWishlist = (userId, wishlistId) => {
+  wishlistId && userId && wishlist.child(`${userId}/${wishlistId}`).remove(errorFn);
 };

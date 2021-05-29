@@ -7,4 +7,14 @@
   .input-text {
     min-width: 310px;
   }
+  .save-button {
+    margin: 0 auto;
+    button {
+      padding-right: 24px;
+      padding-left: 24px;
+      &:disabled {
+        opacity: 70%;
+      }
+    }
+  }
 }

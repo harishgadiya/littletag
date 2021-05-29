@@ -3,19 +3,31 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import Login from '../../molecules/Login';
 import { UserContext } from '../../../contexts/AuthContext';
-import { Icon } from '../../atoms';
+import { Button, Icon } from '../../atoms';
 import './header.scss';
 import { auth } from '../../../config/firebase-config';
+import SearchInput from '../../molecules/SearchInput';
 
 const Header = () => {
   const currentUser = useContext(UserContext);
   const [loginPopup, setLoginPopup] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const history = useHistory();
+
   const loginHandler = () => {
+    console.log('loginPopup => ', loginPopup);
     setLoginPopup((prev) => !prev);
   };
+
   const wishlistHandler = () => {
     history.push('/wishlist');
+  };
+
+  const handleSearch = (value, shouldInvoke) => {
+    setShowSearch(!showSearch);
+    if (shouldInvoke) {
+      setShowSearch(value);
+    }
   };
 
   const checkoutHandler = () => {
@@ -37,8 +49,8 @@ const Header = () => {
     setLoginPopup(false);
   }
 
-  const usernameIntials =
-    (currentUser && currentUser.displayName.split(' ')) || [];
+  const usernameIntials = (currentUser && currentUser.displayName.split(' ')) || [];
+  console.log('currentUser => ', currentUser);
 
   return (
     <header className="header">
@@ -56,15 +68,13 @@ const Header = () => {
                     <div className="col-md-9">
                       <Nav className="mr-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="#link">About Us</Nav.Link>
+                        {/* <Nav.Link href="#link">About Us</Nav.Link> */}
                         <Nav.Link href="#link">Women</Nav.Link>
                         <Nav.Link href="/products">Men</Nav.Link>
                         <Nav.Link href="/listing">Listing</Nav.Link>
-                        <Nav.Link href="#link">Blog</Nav.Link>
-                        <Nav.Link href="#link">Contact</Nav.Link>
-                        <Nav.Link href="/profile">
-                          My Profile
-                        </Nav.Link>
+                        {/* <Nav.Link href="#link">Blog</Nav.Link> */}
+                        {/* <Nav.Link href="#link">Contact</Nav.Link> */}
+                        <Nav.Link href="/profile">My Profile</Nav.Link>
                         {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                       <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                       <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -77,29 +87,18 @@ const Header = () => {
                     <div className="col-md-3">
                       <Nav>
                         {/* hello {currentUser && currentUser.displayName} */}
-                        <Icon name="search" />
+                        <Button className="search-input" onClick={handleSearch} text={<Icon name="search" />} />
                         {usernameIntials.length ? (
                           <NavDropdown
-                            title={
-                              <div className="username">{`${usernameIntials[0][0]}${usernameIntials[1][0]}`}</div>
-                            }
+                            title={<div className="username">{`${usernameIntials[0][0]}${usernameIntials[1][0]}`}</div>}
                           >
-                            <NavDropdown.Item onClick={handleSignOut}>
-                              Logout
-                            </NavDropdown.Item>
+                            <NavDropdown.Item onClick={handleSignOut}>Logout</NavDropdown.Item>
                           </NavDropdown>
                         ) : (
                           <Icon name="user" onClick={loginHandler} />
                         )}
-                        <Icon
-                          name="heart"
-                          className="heart"
-                          onClick={wishlistHandler}
-                        />
-                        <Icon
-                          name="checkout"
-                          onClick={checkoutHandler}
-                        />
+                        <Icon name="heart" className="heart" onClick={wishlistHandler} />
+                        <Icon name="checkout" onClick={checkoutHandler} />
                       </Nav>
                     </div>
                   </div>
@@ -131,7 +130,8 @@ const Header = () => {
           </li>
         </ul>
       </nav> */}
-      <div>{loginPopup && <Login />}</div>
+      {showSearch && <SearchInput udpateState={(value) => handleSearch(false, true)} />}
+      <div>{loginPopup && <Login {...{ isShow: loginPopup, onCloseHandler: loginHandler }} />}</div>
     </header>
   );
 };
