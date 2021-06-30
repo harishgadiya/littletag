@@ -1,0 +1,16 @@
+@import '../../../styles';
+
+.littletags-popup {
+  .modal-dialog {
+    max-width: fit-content;
+  }
+  .close-icon {
+    position: absolute;
+    top: -24px;
+    right: -24px;
+    .icon {
+      height: pxToRem(36);
+      width: pxToRem(36);
+    }
+  }
+}

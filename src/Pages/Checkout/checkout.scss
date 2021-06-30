@@ -1,0 +1,32 @@
+@import '../../styles';
+
+.checkout {
+  display: flex;
+  .product-section {
+    width: 65%;
+  }
+  .price-section {
+    width: 35%;
+  }
+  @include media-breakpoint-down(lg) {
+    flex-direction: column;
+    align-items: center;
+    .product-section {
+      width: 100%;
+    }
+    .price-section {
+      width: calc(100% - 1.25rem);
+      margin-top: pxToRem(24);
+    }
+  }
+  @include media-breakpoint-down(md) {
+    padding: 0;
+    .product-section {
+      width: 100%;
+    }
+    .price-section {
+      width: calc(100% - 1.25rem);
+      margin-top: pxToRem(24);
+    }
+  }
+}

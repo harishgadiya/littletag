@@ -1,0 +1,85 @@
+@import '../../styles';
+
+.listing-product {
+  display: flex;
+  padding: pxToRem(12);
+  @include media-breakpoint-down(lg) {
+    padding: 0;
+  }
+  .filter-section {
+    width: calc(20% - 0.5rem);
+    padding: pxToRem(8);
+    margin-right: pxToRem(8);
+    box-shadow: 0 pxToRem(2) pxToRem(8) 0 $primary-color-F;
+    @include media-breakpoint-down(lg) {
+      width: calc(25% - 0.5rem);
+    }
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+  .products-section {
+    width: 80%;
+    height: fit-content;
+    @include media-breakpoint-down(lg) {
+      width: 75%;
+    }
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+    &.row {
+      margin-left: 0;
+    }
+    .col {
+      width: 19%;
+      margin-right: calc(5% / 4);
+      @include media-breakpoint-up(lg) {
+        &:nth-child(5n + 5) {
+          margin-right: 0;
+        }
+      }
+      @include media-breakpoint-between(md, lg) {
+        width: 32%;
+        margin-right: calc(4% / 2);
+        &:nth-child(3n + 3) {
+          margin-right: 0;
+        }
+      }
+      @include media-breakpoint-down(md) {
+        width: calc(50% - 0.5rem);
+        margin-right: pxToRem(8);
+        &:nth-child(2n + 2) {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .col-md-4 {
+      width: 32%;
+      margin-right: calc(4% / 2);
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+    .col-sm-6 {
+      width: calc(50% - 0.5rem);
+      margin-right: pxToRem(8);
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+    }
+    &--card {
+      .image-area {
+        flex: 1;
+      }
+    }
+  }
+}
+
+.spin-center {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

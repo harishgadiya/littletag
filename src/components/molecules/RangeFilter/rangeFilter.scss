@@ -1,0 +1,38 @@
+@import '../../../styles';
+
+.range-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: pxToRem(8) 0;
+  width: 100%;
+  @include border(top);
+  .min-max {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .input-text {
+      min-width: pxToRem(100);
+      position: relative;
+      input {
+        padding: pxToRem(8) pxToRem(48) pxToRem(8) pxToRem(16);
+      }
+    }
+    .wrapper {
+      position: relative;
+      & > .button {
+        width: auto;
+        font-size: 10px;
+        padding: 5px;
+        background: black;
+        border: 0;
+        position: absolute;
+        right: 5px;
+        top: 25px;
+      }
+    }
+    span {
+      margin: pxToRem(20) pxToRem(4) 0 pxToRem(4);
+    }
+  }
+}

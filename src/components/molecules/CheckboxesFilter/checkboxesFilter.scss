@@ -1,0 +1,10 @@
+@import '../../../styles';
+
+.checkboxes-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 0;
+  width: 100%;
+  @include border(top);
+}

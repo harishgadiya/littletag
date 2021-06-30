@@ -1,0 +1,45 @@
+@import '../../styles';
+
+.order-successful {
+  display: flex;
+  flex-direction: column;
+  margin: pxToRem(24) auto;
+  padding: 0;
+  max-width: pxToRem(400);
+  min-height: pxToRem(500);
+  .body-copy {
+    font-size: $heading-size-5;
+    margin-bottom: 0;
+  }
+  .sumarry {
+    @include flex-center(column);
+    padding: pxToRem(32);
+    background-color: $primary-color-E;
+    p {
+      margin-bottom: pxToRem(8);
+    }
+  }
+  .delivery,
+  .address,
+  .continue-shopping {
+    padding: pxToRem(12);
+  }
+  .address {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .continue-shopping {
+  }
+  .icon-arrow-left {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    &:before {
+      content: '\003E';
+    }
+  }
+}

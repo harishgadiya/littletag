@@ -1,0 +1,27 @@
+.breadcrumb {
+  width: 100%;
+  // background: #eee;
+  padding: 10px 0;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  &-item {
+    &:first-child {
+      &::before {
+        content: '' !important;
+      }
+    }
+    &::before {
+      color: darkgray !important;
+      content: '>' !important;
+      font-size: 16px;
+    }
+    a {
+      color: darkgrey;
+      text-decoration: none;
+    }
+    &.active {
+      color: #575757;
+    }
+  }
+}

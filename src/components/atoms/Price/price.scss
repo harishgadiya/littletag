@@ -1,0 +1,40 @@
+@import '../../../styles';
+
+.price {
+  display: flex;
+  flex-direction: row;
+  margin-top: 8px;
+  align-items: baseline;
+  .current,
+  .previous {
+    font-size: $price-size;
+  }
+  .current {
+    font-weight: $font-semibold;
+    margin-right: pxToRem(8);
+  }
+  .previous {
+    text-decoration: line-through;
+    color: $primary-color-C;
+    font-weight: $font-semibold;
+    margin-left: pxToRem(20);
+  }
+  .wrapper {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d87d60;
+    display: flex;
+    align-items: baseline;
+    .discountPercent {
+      margin-left: 20px;
+    }
+  }
+}
+
+.tax {
+  color: #03a685;
+  font-weight: 500;
+  font-size: 14px;
+  display: block;
+  margin: 5px 10px 0 0;
+}

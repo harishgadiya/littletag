@@ -1,0 +1,25 @@
+@import '../../../styles';
+
+.little-tags-button {
+  padding: pxToRem(6) pxToRem(8);
+  font-size: $button-size;
+  font-weight: $font-bold;
+  border-radius: $border-radius;
+  margin-top: pxToRem(8);
+  &:disabled {
+    opacity: 0.7;
+  }
+  @include media-breakpoint-between(md, lg) {
+    padding: pxToRem(4) pxToRem(6);
+  }
+}
+
+.outline {
+  border: pxToRem(2) solid $primary-color-B;
+  color: $primary-color-A;
+}
+
+.filled {
+  background-color: $primary-color-B;
+  color: $primary-color-H;
+}

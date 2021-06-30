@@ -1,0 +1,12 @@
+@import '../../../styles';
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin-right: pxToRem(12);
+  .filter-heading {
+    font-size: $heading-size-4;
+  }
+}

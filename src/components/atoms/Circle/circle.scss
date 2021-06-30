@@ -1,0 +1,15 @@
+@import '../../../styles';
+
+.circle {
+  border-radius: 50%;
+  background-color: $primary-color-J;
+  color: $primary-color-B;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  @include flex-center();
+  overflow: hidden;
+  span {
+    font-size: 32px;
+  }
+}

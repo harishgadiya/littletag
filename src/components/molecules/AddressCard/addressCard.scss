@@ -1,0 +1,29 @@
+@import '../../../styles';
+
+.address-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: pxToRem(12) 0;
+  .tag-edit {
+    display: flex;
+    justify-content: space-between;
+    .tag {
+      background-color: $primary-color-B;
+      color: $primary-color-J;
+      padding: pxToRem(4) pxToRem(10);
+    }
+  }
+  .name-mobile {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: pxToRem(4);
+    .mobile {
+      margin-left: pxToRem(32);
+    }
+  }
+  .address {
+    margin-top: 12px;
+    font-weight: $font-medium;
+  }
+}

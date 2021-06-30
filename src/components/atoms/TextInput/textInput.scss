@@ -1,0 +1,23 @@
+@import '../../../styles';
+
+.input-text {
+  display: inline-block;
+  // min-width: 400px;
+  h5 {
+    margin-bottom: pxToRem(8);
+  }
+  input {
+    width: 100%;
+    padding: pxToRem(10);
+    // padding: pxToRem(12) pxToRem(20);
+    display: inline-block;
+    border: pxToRem(1) solid $primary-color-A;
+    background-color: $primary-color-E;
+    border-radius: $border-radius;
+    box-sizing: border-box;
+    font-size: 14px;
+    &:focus {
+      outline: none;
+    }
+  }
+}

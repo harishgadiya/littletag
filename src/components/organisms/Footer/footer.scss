@@ -1,0 +1,56 @@
+@import '../../../styles';
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: pxToRem(32);
+  .contact-us {
+    @include flex-center();
+    justify-content: space-between;
+    width: 100%;
+    padding: pxToRem(16) pxToRem(96);
+    background-color: $primary-color-A;
+    @include media-breakpoint-down(lg) {
+      padding: pxToRem(12) pxToRem(48);
+    }
+    @include media-breakpoint-down(lg) {
+      padding: pxToRem(8) pxToRem(24);
+    }
+    .title {
+      color: $primary-color-J;
+      margin-bottom: 0;
+      font-weight: $font-medium;
+    }
+    .button {
+      margin-left: pxToRem(24);
+      background-color: $primary-color-A;
+      color: $primary-color-C;
+      font-weight: $font-medium;
+    }
+    .social-icon-group {
+      display: flex;
+      align-items: center;
+      .icon {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+  .quick-links-group {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: pxToRem(32) 0;
+    .quick-links {
+      display: flex;
+      flex-direction: column;
+      padding: pxToRem(4) pxToRem(16);
+    }
+  }
+  .copyright {
+    .body-copy {
+      font-weight: $font-semibold;
+    }
+  }
+}

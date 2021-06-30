@@ -1,0 +1,48 @@
+@import '../../../styles';
+
+.checkout-products {
+  display: flex;
+  flex-direction: column;
+  margin: 0 pxToRem(14);
+  .checkout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-color-E;
+    padding: 12px 4px;
+    border-radius: $border-radius $border-radius 0 0;
+    .address {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      select {
+        width: pxToRem(400);
+        padding: pxToRem(6);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid $primary-color-A;
+        background-color: $primary-color-E;
+        border-radius: $border-radius;
+        box-sizing: border-box;
+        @include media-breakpoint-down(md) {
+          width: pxToRem(200);
+        }
+      }
+    }
+    @include media-breakpoint-down(md) {
+      h3 {
+        font-size: $heading-sm-size-3;
+      }
+      h4 {
+        font-size: $heading-sm-size-4;
+      }
+    }
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
